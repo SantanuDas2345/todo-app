@@ -4,6 +4,9 @@ import Summary from './components/summary/Summary'
 // import './app.css'
 
 function App() {
+  const movieDetails = (object) => {
+    console.log(object);
+  }
   return (
     <BrowserRouter>
     <Routes>
