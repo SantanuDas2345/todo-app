@@ -1,10 +1,23 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React, { useState, useEffect } from 'react'
+import { Link, useLocation } from 'react-router-dom'
 import { Card, Button } from 'react-bootstrap'
 import Navbar from '../navbar/Navbar'
 import './summary.css'
 
-const Summary = () => {
+const Summary = (props) => {
+    // const location = useLocation();
+    // const myData = location.state.data;
+    // console.log(location.state.data)
+
+    // const [data, setData] = useState([]);
+    // // console.log(data);
+    // console.log(props.dataStore)
+
+    // const handleBook = (e) => {
+    //     e.preventDefault();
+    //     setData([props.dataStore])
+    //     console.log(data)
+    // }
     return (
         <>
         <Navbar />
@@ -19,7 +32,7 @@ const Summary = () => {
                     <Card.Text>
                         losses and struggles of two families from vastly different worlds
                     </Card.Text>
-                    <Button variant="info"><Link to='/summary' className='text-white'>Book Now</Link></Button>
+                    <Button variant="info"><Link to='/summary' className='text-white' >Book Now</Link></Button>
                 </Card.Body>
             </Card>
         </div>
