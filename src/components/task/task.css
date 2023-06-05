@@ -1,9 +1,47 @@
 .itemslist {
+    width: 100%;
     display: flex;
-    justify-content: space-between;
-}
-
-.buttons {
+    justify-content: center;
+    padding: 10px;
+    opacity: .7;
+  }
+  
+  .buttons {
     display: flex;
     gap: 10px;
-}
+  }
+  tr {
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+  }
+  
+  td {
+    flex: 0 0 14.5%;
+    text-align: center;
+    align-self: center;
+  }
+  
+  td:not(:last-child){
+      margin-left: .2rem;
+  }
+  td:first-child{
+      margin-left: 1rem;
+  }
+  td:last-child{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+  }
+
+  @media screen and (max-width: 650px) {
+    .itemslist {
+      width: 650px;
+    }
+  }
+
+  @media screen and (max-width: 1098px) {
+    hr {
+      width: 1098px;
+    }
+  }

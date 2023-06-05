@@ -1,41 +1,56 @@
 import React, { useEffect, useState } from 'react';
 import './taskform.css'
 import { RxCross2 } from 'react-icons/rx'
+import Select from 'react-select';
+const options = [
+  { value: 'default', label: 'Default' },
+  { value: 'urgent', label: 'Urgent' },
+  { value: 'important', label: 'Important' }
+];
+
+const statusOptions = [
+  { value: 'open', label: 'Open' },
+  { value: 'working', label: 'Working' },
+  { value: 'done', label: 'Done' },
+  { value: 'overdue', label: 'Overdue' }
+];
+
 
 const TaskForm = ({ addTask, updateTask, currentTask, setCurrentTask, setShow }) => {
+
+  
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [dueDate, setDueDate] = useState('');
   const [tag, setTag] = useState('');
   const [status, setStatus] = useState('');
+  // const [validateData, setValidateData] = useState({});
+  const [showvalidation, setShowValidation] = useState(false);
 
-  // useEffect(() => {
-  //   console.log('Current Task:', currentTask);
+  useEffect(() => {
+    if (currentTask) {
+      setTitle(currentTask.title);
+      setDescription(currentTask.description);
+      setDueDate(currentTask.dueDate);
+      setTag(currentTask.tag);
+      setStatus(currentTask.status);
+    }
+  }, [currentTask]);
 
-  //   if (currentTask) {
-  //     setTitle(currentTask.title);
-  //     setDescription(currentTask.description);
-  //     setDueDate(currentTask.dueDate);
-  //     setTag(currentTask.tag);
-  //     setStatus(currentTask.status);
-  //   } else {
-  //     resetForm();
-  //   }
-  // }, [currentTask]);
-
-  const validate = () => {
-    
-  }
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (title.trim() === '' || description.trim() === '') {
+      setShowValidation(true);
+      return;
+    }
 
     if (currentTask) {
       updateTask(currentTask.id, title, description, dueDate, tag, status);
       setCurrentTask(null);
+      console.log(currentTask.id);
     } else {
       addTask(title, description, dueDate, tag, status);
     }
-
     resetForm();
   };
 
@@ -46,13 +61,18 @@ const TaskForm = ({ addTask, updateTask, currentTask, setCurrentTask, setShow })
     setTag('');
     setStatus('');
     setShow(false);
+    setCurrentTask(null)
   };
 
-  console.log('Rendered with Title:', title);
-  console.log('Rendered with Description:', description);
-  console.log('Rendered with Due Date:', dueDate);
-  console.log('Rendered with Tag:', tag);
-  console.log('Rendered with Status:', status);
+  const handleTagChange = (selectedOption) => {
+    setTag(selectedOption.value);
+  };
+
+  
+  const handleStatusChange = (selectedOption) => {
+    setStatus(selectedOption.value);
+  };
+
 
   return (
     <div className="task-container">
@@ -61,33 +81,34 @@ const TaskForm = ({ addTask, updateTask, currentTask, setCurrentTask, setShow })
           <span style={{ fontSize: "20px" }}>Add task</span>
           <RxCross2 style={{ cursor: 'pointer', fontSize: '20px' }} />
         </div>
-
         <div className="title">
           <label htmlFor="title">Title:</label>
-          <input
-            className='sub-title'
-            type="text"
-            id="title"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            required
+          <input type="text" 
+          className="form-control sub-title" 
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
           />
+
+          {showvalidation && title.length === 0 ? <p>empty</p> :''}
         </div>
 
         <div className="description">
           <label htmlFor="description">Description:</label>
           <textarea
-            className="sub-description"
+            className=" form-control sub-description"
             id="description"
+            placeholder="enter the descriptions here"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
             required
           ></textarea>
+           {showvalidation && description.length === 0 ? <p>empty</p> :''}
         </div>
 
         <div className="duedate">
-          <label htmlFor="dueDate">Due Date:</label>
+          <label htmlFor="dueDate" style={{width: '6rem'}}>Due Date:</label>
           <input
+          className="form-control"
             type="date"
             id="dueDate"
             value={dueDate}
@@ -98,25 +119,21 @@ const TaskForm = ({ addTask, updateTask, currentTask, setCurrentTask, setShow })
 
         <div className="tag">
           <label htmlFor="tag">Tag:</label>
-          <input
+          <Select
             className="sub-tag"
-            type="text"
-            id="tag"
-            value={tag}
-            onChange={(e) => setTag(e.target.value)}
-            required
+            options={options}
+            value={options.find((option) => option.value === tag)}
+            onChange={handleTagChange}
           />
         </div>
 
         <div className="status">
           <label htmlFor="status">Status:</label>
-          <input
+          <Select
             className="sub-status"
-            type="text"
-            id="status"
-            value={status}
-            onChange={(e) => setStatus(e.target.value)}
-            required
+            options={statusOptions}
+            value={statusOptions.find((option) => option.value === status)}
+            onChange={handleStatusChange}
           />
         </div>
 

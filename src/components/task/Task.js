@@ -43,6 +43,7 @@ const Task = ({ task, deleteTask, editTask, setShow }) => {
     {
       click && <Confirmdelete onDeleteConfirm={onDeleteConfirm} onDeleteCancelled={onDeleteCancelled}/>
     }
+    <hr style={{opacity:'.1'}}/>
     </>
   );
 };

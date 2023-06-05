@@ -15,7 +15,6 @@
     width: 416px;
     background-color: #e5e5ea;
     padding: 30px;
-    box-shadow: 2px 2px 2px;
     position: absolute;
     top: 15%;
     border-radius: 3px;
@@ -27,11 +26,13 @@
     display: flex;
     align-items: center;
     gap: 3px;
+    opacity: .6;
   }
   
   .textDelete {
     font-size: 17px;
     margin-bottom: 40px;
+    opacity: .6;
   }
   
   .buttons {

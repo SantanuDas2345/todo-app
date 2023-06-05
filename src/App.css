@@ -1,7 +1,6 @@
-.app {
-    margin: 10px;
+body {
+  margin: 10px;
 }
-
 .header {
     padding: 0.2rem 1.2rem;
     background-color: #082232;
@@ -12,24 +11,57 @@
     margin-bottom: 20px;
     padding: 0.7rem 1rem;
     height: 73px;
-}
-
-.inputSearch {
+  }
+  
+  .inputSearch {
     width: 100%;
-}
-
-.addTaskButton {
+    opacity: .4;
+  }
+  
+  .addTaskButton {
     width: 30%;
     color: white;
     background-color: #082232;
-}
-
-.searchAndAddTAsk {
+  }
+  
+  .searchAndAddTAsk {
     display: flex;
     align-items: center;
-}
-
-tr {
+  }
+  
+  table {
+    width: 98vw;
+    margin: 0 auto;
+  }
+  thead {
+    background-color: #ece1e1a6;
+    opacity: .5;
+    height: 3rem;
     display: flex;
-    gap: 47%;
-}
+    align-items: center;
+  }
+
+  select {
+    margin-left: .6rem;
+  }
+  
+  tr,
+  .table-data {
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+  }
+  
+  th {
+    flex: 0 0 14.5%;
+    text-align: center;
+  }
+
+  @media screen and (max-width: 1098px) {
+    thead {
+      width: 1098px;
+    }
+    .app {
+      width: 1098px;
+    }
+  }
